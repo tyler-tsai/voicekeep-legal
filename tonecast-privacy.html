@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Tonecast</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 720px; margin: 2em auto; padding: 0 1em; color: #222; line-height: 1.55; }
+h1 { font-size: 1.8em; margin-bottom: 0.2em; }
+h2 { font-size: 1.2em; margin-top: 1.8em; }
+.updated { color: #666; font-size: 0.9em; margin-bottom: 2em; }
+a { color: #1668b4; }
+code { background: #f2f2f2; padding: 0 0.3em; border-radius: 3px; font-size: 0.92em; }
+</style>
+</head>
+<body>
+
+<h1>Tonecast — Privacy Policy</h1>
+<p class="updated">Last updated: 2026-05-23</p>
+
+<p>Tonecast is a personal voice keyboard for iOS — it adds a system-wide
+keyboard that lets you dictate, shift tone, and translate between Chinese
+and English. This policy describes what data the app and the keyboard
+extension process, where it goes, and how long it stays. We collect the
+minimum needed to make the keyboard work; nothing else.</p>
+
+<h2>1. Data the app processes</h2>
+
+<p><strong>Voice recordings.</strong> When you tap the mic in the Tonecast
+keyboard or in the host app, the app captures a short audio clip
+(≤ 60 seconds). The clip is sent over HTTPS to our proxy
+(<code>voice-keys-proxy.tyler90177.workers.dev</code>), which forwards it
+to OpenAI / OpenRouter for transcription and tone rewriting. The clip is
+held in memory only — it is not written to disk on the proxy and is not
+stored by us. OpenAI's and OpenRouter's retention policies apply to the
+brief interval the clip exists on their servers; see their respective
+privacy notices.</p>
+
+<p><strong>Transcripts and rewrites.</strong> The text returned from the
+voice loop is inserted into whichever app you're typing into. Recent
+transcripts are temporarily cached in App Group storage on your device so
+the keyboard's "Recents" panel can show them — they never leave your
+phone and are pruned automatically.</p>
+
+<p><strong>Device attestation key.</strong> On first launch the app
+generates a unique cryptographic key in your iPhone's Secure Enclave and
+registers the <em>public</em> half with our proxy (via Apple's App
+Attest). The private half never leaves your device. This key prevents
+abuse of our proxy — without it the daily request cap can't be enforced
+fairly.</p>
+
+<p><strong>Subscription state.</strong> If you purchase Tonecast Plus,
+StoreKit hands the app an Apple-signed receipt (JWS) which we forward to
+our proxy. The proxy records only:</p>
+<ul>
+<li>Your device attestation key id (a hash, not personally identifying)</li>
+<li>The product id (monthly vs annual)</li>
+<li>The subscription expiry timestamp</li>
+<li>Apple's original-transaction id (for refund correlation)</li>
+</ul>
+<p>We do <em>not</em> receive your Apple ID, name, email, payment card, or
+billing address. Apple handles all payment.</p>
+
+<h2>2. Keyboard "Full Access" permission</h2>
+
+<p>The Tonecast keyboard requires <strong>Full Access</strong> (iOS
+Settings → General → Keyboard → Keyboards → Tonecast → Allow Full
+Access). This is required so the keyboard extension can:</p>
+
+<ul>
+<li>Reach our proxy over HTTPS for transcription and tone rewriting (iOS
+denies all network access to keyboards without Full Access).</li>
+<li>Share state with the main Tonecast app via App Group storage
+(settings, tone style guides, Flow Session state).</li>
+</ul>
+
+<p>Tonecast does <em>not</em> read or store the text you type into other
+apps. The keyboard only transmits audio you explicitly record by tapping
+the mic. We do not log keystrokes, passwords, or unrelated input.</p>
+
+<h2>3. Data we do NOT collect</h2>
+
+<ul>
+<li>No analytics SDK (Firebase, Mixpanel, Sentry, etc.)</li>
+<li>No advertising identifiers</li>
+<li>No location data</li>
+<li>No contacts, photos, or microphone access outside of explicit recording</li>
+<li>No keystroke logging — the keyboard only sends audio you record</li>
+<li>No name, email, or account login (the app has no user accounts)</li>
+</ul>
+
+<h2>4. Where data lives</h2>
+
+<ul>
+<li><strong>On your iPhone:</strong> tone style guides, personal
+vocabulary, default tone / translate preferences, Flow Session state,
+recent transcripts. Backed up via iCloud iff you have iCloud Backup
+enabled at the OS level (Tonecast does not use iCloud sync directly).</li>
+<li><strong>On our proxy (Cloudflare Workers KV):</strong> device
+attestation public key + subscription tier record. Both are keyed by an
+opaque hash, not by anything that identifies you personally.</li>
+<li><strong>On OpenAI / OpenRouter:</strong> only the in-flight voice clip
+during the seconds it takes to transcribe + the rewrite text. Subject to
+their retention.</li>
+</ul>
+
+<h2>5. Retention</h2>
+
+<ul>
+<li>On-device data: lives until you delete the app.</li>
+<li>Proxy device records: kept indefinitely while you use the app; deleted
+on request (email below).</li>
+<li>Subscription records: kept indefinitely for support / refund handling.</li>
+</ul>
+
+<h2>6. Children</h2>
+
+<p>Tonecast is not directed to children under 13. We do not knowingly
+collect data from children under 13.</p>
+
+<h2>7. Your rights</h2>
+
+<p>You can:</p>
+<ul>
+<li>Delete all on-device data by uninstalling the app.</li>
+<li>Revoke the keyboard's Full Access in iOS Settings → General →
+Keyboard → Tonecast.</li>
+<li>Cancel your subscription anytime via iOS Settings → Apple ID →
+Subscriptions.</li>
+<li>Request deletion of your proxy-side records by emailing the address
+below; we'll confirm within 30 days.</li>
+</ul>
+
+<h2>8. Changes to this policy</h2>
+
+<p>If we change this policy materially we'll update the "Last updated"
+date and post the change here. For non-trivial changes affecting how data
+is used, we'll surface the change in-app on next launch.</p>
+
+<h2>9. Contact</h2>
+
+<p>Questions or deletion requests:
+<a href="mailto:tyler90177@gmail.com">tyler90177@gmail.com</a></p>
+
+<p style="margin-top: 3em; font-size: 0.85em; color: #888;">
+<a href="tonecast-terms.html">Terms of Use</a>
+</p>
+
+</body>
+</html>
