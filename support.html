@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MochiBook · Support</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
+    max-width: 720px; margin: 2rem auto; padding: 0 1.25rem;
+    line-height: 1.55; color: #2c2a26; background: #fdfaf3;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { color: #efece4; background: #1a1816; }
+    a    { color: #98e3c9; }
+  }
+  h1 { font-size: 1.8rem; margin-bottom: 0.25em; }
+  h2 { margin-top: 1.75em; }
+  .meta { color: #888; font-size: 0.9rem; }
+  ul { padding-left: 1.25rem; }
+  li { margin: 0.25em 0; }
+  code { background: rgba(127,127,127,0.15); padding: 0.1em 0.35em; border-radius: 4px; }
+  hr { border: 0; border-top: 1px solid rgba(127,127,127,0.3); margin: 2rem 0; }
+</style>
+</head>
+<body>
+
+<h1>MochiBook Support</h1>
+<p class="meta">Voice-first expense tracking, with Mochi as your bookkeeping companion.</p>
+
+<h2>Get help</h2>
+<p>The fastest way to reach the developer:</p>
+<ul>
+  <li><strong>Email:</strong> <a href="mailto:tyler90177@gmail.com">tyler90177@gmail.com</a></li>
+</ul>
+<p>Please include your iOS version and a brief description of what you tried.
+Screenshots help a lot.</p>
+
+<h2>Common questions</h2>
+
+<h3>Why does the app need microphone access?</h3>
+<p>MochiBook converts your voice into structured expense entries. The
+microphone is used only when you press and hold the mic button — no
+always-on listening. The recording is sent to a transcription service,
+turned into text, and then discarded.</p>
+
+<h3>How is my voice processed?</h3>
+<p>When you hold the mic, the audio is sent over HTTPS to our Cloudflare
+Worker proxy, which forwards it to OpenAI's Whisper (for speech-to-text)
+and GPT-4o-mini (for parsing into amount + category + note). The audio
+is discarded after transcription; only the structured text entry is
+saved on your device. The fourth onboarding slide explains this in
+plain language and you tap Get Started to acknowledge it before any
+recording can happen. Full details in the
+<a href="./privacy.html">Privacy Policy</a>.</p>
+
+<h3>Where is my data stored?</h3>
+<p>Locally on your device, in the app's private container. Daily JSON
+snapshots back up to the same container automatically. You can export
+to CSV or JSON from Settings &rarr; Data &amp; Backups any time.</p>
+
+<h3>Is there an account or login?</h3>
+<p>No. MochiBook has no user accounts. Apple's App Attest framework
+authenticates your device to our proxy using a key generated in your
+iPhone's Secure Enclave — we never see your Apple ID, email, or name.</p>
+
+<h3>I lost my data after reinstalling. What happened?</h3>
+<p>iOS clears an app's local data when it is uninstalled. Before
+uninstalling, export your data via Settings &rarr; Data &amp; Backups
+&rarr; Back up now (saves a JSON file to your share sheet — keep it in
+iCloud Drive). After reinstalling, use Import to restore.</p>
+
+<h3>The voice loop feels slow when I travel</h3>
+<p>The transcription server runs in the US. Round-trip latency is
+highest from Asia / EU. MochiBook also includes a local fast-path that
+handles short terse entries ("lunch 200", "拿鐵一百五") without hitting
+the server at all — these should feel instant. Longer or unusual
+phrases still go to the AI.</p>
+
+<h3>How do I cancel a subscription?</h3>
+<p>Subscriptions ship in a future update; the current version is free
+to use with a daily voice cap. When subscriptions are available you'll
+be able to manage and cancel them via iPhone Settings &rarr; your Apple
+ID &rarr; Subscriptions.</p>
+
+<h2>Privacy</h2>
+<p>See the <a href="./privacy.html">Privacy Policy</a> for details on
+data handling, and the <a href="./terms.html">Terms of Use</a> for the
+service agreement.</p>
+
+<hr>
+
+<h1 lang="zh-Hant">MochiBook 支援</h1>
+<p class="meta" lang="zh-Hant">用講的記帳, 米米陪你長大。</p>
+
+<h2 lang="zh-Hant">取得協助</h2>
+<p lang="zh-Hant">最快聯絡開發者的方式:</p>
+<ul lang="zh-Hant">
+  <li><strong>信箱:</strong> <a href="mailto:tyler90177@gmail.com">tyler90177@gmail.com</a></li>
+</ul>
+<p lang="zh-Hant">麻煩附上你的 iOS 版本與簡單描述。截圖很有幫助。</p>
+
+<h2 lang="zh-Hant">常見問題</h2>
+
+<h3 lang="zh-Hant">為什麼需要麥克風權限?</h3>
+<p lang="zh-Hant">MochiBook 把你說的話轉成記帳資料。麥克風只有在你按住 mic 按鈕時啟用,不會背景錄音。錄音上傳轉錄成文字後,音檔即從伺服器丟棄。</p>
+
+<h3 lang="zh-Hant">我的聲音怎麼被處理?</h3>
+<p lang="zh-Hant">按住麥克風時,錄音透過 HTTPS 傳給我們的 Cloudflare Worker 代理,再由代理轉送給 OpenAI Whisper(做語音辨識)與 GPT-4o-mini(把文字解析成金額/分類/備註)。音檔轉成文字後即丟棄,只有結構化的記帳項目存在你的裝置上。第四張 onboarding 投影片會清楚說明這件事,你點「開始使用」即代表同意,之後麥克風才可以送出資料。完整內容見<a href="./privacy.html">隱私權政策</a>。</p>
+
+<h3 lang="zh-Hant">資料存在哪?</h3>
+<p lang="zh-Hant">存在你 iPhone 上的 app 私有容器。每天會自動產生 JSON 快照備份在同一個容器內。可以隨時從「設定 → 資料與備份」匯出 CSV 或 JSON。</p>
+
+<h3 lang="zh-Hant">需要註冊帳號嗎?</h3>
+<p lang="zh-Hant">不用。MochiBook 沒有帳號系統。Apple App Attest 會用你 iPhone Secure Enclave 裡的金鑰跟我們的 proxy 認證——我們不會看到你的 Apple ID、信箱、或姓名。</p>
+
+<h3 lang="zh-Hant">我重灌後資料不見了!</h3>
+<p lang="zh-Hant">iOS 在你解除安裝 app 時會清掉本地資料。解除安裝前,從「設定 → 資料與備份 → 立即備份」把 JSON 存到 iCloud Drive。重灌後用「匯入」還原。</p>
+
+<h3 lang="zh-Hant">我在國外用感覺比較慢?</h3>
+<p lang="zh-Hant">轉錄伺服器在美國,亞洲、歐洲的網路 round-trip 比較高。MochiBook 有本地快取路徑,簡短的記帳(像「午餐 200」或「拿鐵一百五」)完全不打伺服器,瞬間完成。其他複雜句仍走 AI。</p>
+
+<h3 lang="zh-Hant">怎麼取消訂閱?</h3>
+<p lang="zh-Hant">訂閱功能在未來版本提供;目前版本免費可用,有每日語音次數上限。等訂閱推出後,可以從 iPhone「設定 → 你的 Apple ID → 訂閱項目」管理或取消。</p>
+
+<h2 lang="zh-Hant">隱私</h2>
+<p lang="zh-Hant">詳細資料處理請見<a href="./privacy.html">隱私權政策</a>,服務條款見<a href="./terms.html">使用條款</a>。</p>
+
+</body>
+</html>
